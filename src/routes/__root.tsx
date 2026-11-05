@@ -126,13 +126,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           description:
             "UK removals and transport company offering house removals, office relocation, packing services and furniture transport.",
           areaServed: "United Kingdom",
-          telephone: "+44 20 3900 0000",
+          url: "https://www.aspireremovals.co.uk",
+          telephone: "07493 732371",
           email: "info@aspireremovals.co.uk",
           address: {
             "@type": "PostalAddress",
-            streetAddress: "12 Kingsway",
-            addressLocality: "London",
-            postalCode: "WC2B 6UN",
+            streetAddress: "167 Henley Avenue",
+            addressLocality: "Sutton",
+            postalCode: "SM3 9SD",
             addressCountry: "GB",
           },
         }),

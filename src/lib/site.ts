@@ -18,6 +18,7 @@ export const SITE = {
   phone: "07493 732371",
   email: "info@aspireremovals.co.uk",
   address: "167 Henley Avenue, Sutton, SM3 9SD",
+  url: "https://www.aspireremovals.co.uk",
   hours: [
     { d: "Monday – Friday", h: "07:00 – 19:00" },
     { d: "Saturday", h: "08:00 – 17:00" },

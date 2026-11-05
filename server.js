@@ -76,7 +76,7 @@ const server = http.createServer(async (req, res) => {
       return;
     }
 
-    if (req.url === '/' || req.url?.startsWith('/assets/') || req.url?.startsWith('/@') || req.url?.endsWith('.css') || req.url?.endsWith('.js') || req.url?.endsWith('.png') || req.url?.endsWith('.jpg') || req.url?.endsWith('.jpeg') || req.url?.endsWith('.svg') || req.url?.endsWith('.ico')) {
+    if (req.url === '/' || req.url?.startsWith('/assets/') || req.url?.startsWith('/@') || req.url === '/sitemap.xml' || req.url === '/robots.txt' || req.url?.endsWith('.css') || req.url?.endsWith('.js') || req.url?.endsWith('.xml') || req.url?.endsWith('.txt') || req.url?.endsWith('.png') || req.url?.endsWith('.jpg') || req.url?.endsWith('.jpeg') || req.url?.endsWith('.svg') || req.url?.endsWith('.ico')) {
       const filePath = req.url === '/' ? '/index.html' : req.url;
       const absolutePath = path.join(rootDir, 'dist', filePath);
       try {
@@ -196,6 +196,8 @@ function getContentType(filePath) {
   if (filePath.endsWith('.css')) return 'text/css; charset=utf-8';
   if (filePath.endsWith('.js')) return 'application/javascript; charset=utf-8';
   if (filePath.endsWith('.json')) return 'application/json; charset=utf-8';
+  if (filePath.endsWith('.xml')) return 'application/xml; charset=utf-8';
+  if (filePath.endsWith('.txt')) return 'text/plain; charset=utf-8';
   if (filePath.endsWith('.png')) return 'image/png';
   if (filePath.endsWith('.jpg') || filePath.endsWith('.jpeg')) return 'image/jpeg';
   if (filePath.endsWith('.svg')) return 'image/svg+xml';
