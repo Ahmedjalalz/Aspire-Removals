@@ -126,7 +126,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           description:
             "UK removals and transport company offering house removals, office relocation, packing services and furniture transport.",
           areaServed: "United Kingdom",
-          url: "https://www.aspireremovals.co.uk",
+          url: "https://www.aspireremovalsandtransport.co.uk",
           telephone: "07493 732371",
           email: "info@aspireremovals.co.uk",
           address: {

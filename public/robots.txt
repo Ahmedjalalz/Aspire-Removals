@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.aspireremovals.co.uk/sitemap.xml
+Sitemap: https://www.aspireremovalsandtransport.co.uk/sitemap.xml
