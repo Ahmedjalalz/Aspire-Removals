@@ -4,6 +4,7 @@ import { PageHero } from "@/components/site/PageHero";
 import { Reveal } from "@/components/site/Reveal";
 import { sendEmail } from "@/lib/send-email-client";
 import { PRODUCTS } from "@/lib/products";
+import { SITE } from "@/lib/site";
 import { CheckCircle2, PackageCheck, Plus, Minus, ShoppingBag } from "lucide-react";
 
 interface SearchParams {
@@ -18,13 +19,69 @@ export const Route = createFileRoute("/product-quote")({
   },
   head: () => ({
     meta: [
-      { title: "Get a Product Quote | Aspire Removals & Transport" },
-      { name: "description", content: "Request a custom quote for packing boxes, bubble wrap, tape and moving materials." },
-      { property: "og:title", content: "Product Quote | Aspire Removals" },
-      { property: "og:description", content: "Custom packing materials quote — replied to within 24 hours." },
-      { property: "og:url", content: "/product-quote" },
+      { title: "Packing Supplies & Boxes Quote | Aspire Removals" },
+      {
+        name: "description",
+        content:
+          "Request a fast, custom quotation for packing boxes, moving kits, bubble wrap, and protective materials with doorstep delivery across the UK.",
+      },
+      { property: "og:title", content: "Packing Supplies & Boxes Quote | Aspire Removals" },
+      {
+        property: "og:description",
+        content:
+          "Request a custom quote for packing boxes, moving kits, bubble wrap, and protective materials across the UK.",
+      },
+      { property: "og:url", content: `${SITE.url}/product-quote` },
+      { property: "og:image", content: `${SITE.url}/Large%20Boxes.jpeg` },
+      { property: "og:image:width", content: "1024" },
+      { property: "og:image:height", content: "1024" },
+      {
+        property: "og:image:alt",
+        content: "Aspire Removals moving supplies and boxes quotation",
+      },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Packing Supplies & Boxes Quote | Aspire Removals" },
+      {
+        name: "twitter:description",
+        content:
+          "Request a custom quote for packing boxes, moving kits, bubble wrap, and protective materials across the UK.",
+      },
+      { name: "twitter:image", content: `${SITE.url}/Large%20Boxes.jpeg` },
+      {
+        name: "twitter:image:alt",
+        content: "Aspire Removals moving supplies and boxes quotation",
+      },
     ],
-    links: [{ rel: "canonical", href: "/product-quote" }],
+    links: [{ rel: "canonical", href: `${SITE.url}/product-quote` }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            {
+              "@type": "ListItem",
+              position: 1,
+              name: "Home",
+              item: `${SITE.url}/`,
+            },
+            {
+              "@type": "ListItem",
+              position: 2,
+              name: "Products",
+              item: `${SITE.url}/products`,
+            },
+            {
+              "@type": "ListItem",
+              position: 3,
+              name: "Product Quote",
+              item: `${SITE.url}/product-quote`,
+            },
+          ],
+        }),
+      },
+    ],
   }),
   component: ProductQuote,
 });
@@ -191,7 +248,10 @@ function ProductQuote() {
                         />
                         <img
                           src={p.img}
-                          alt={p.title}
+                          alt={p.alt}
+                          width={56}
+                          height={56}
+                          loading="lazy"
                           className="h-14 w-14 rounded-xl object-cover border border-border bg-white shrink-0"
                         />
                         <label htmlFor={`product-${p.id}`} className="min-w-0 cursor-pointer">

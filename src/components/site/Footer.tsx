@@ -3,6 +3,13 @@ import { Facebook, Instagram, Linkedin, Twitter, Mail, Phone, MapPin } from "luc
 import { Logo } from "./Logo";
 import { SITE, SERVICES } from "@/lib/site";
 
+const SOCIAL_LINKS = [
+  { name: "Facebook", href: "https://www.facebook.com/aspireremovals", icon: Facebook },
+  { name: "Instagram", href: "https://www.instagram.com/aspireremovals", icon: Instagram },
+  { name: "X (Twitter)", href: "https://twitter.com/aspireremovals", icon: Twitter },
+  { name: "LinkedIn", href: "https://www.linkedin.com/company/aspire-removals", icon: Linkedin },
+];
+
 export function Footer() {
   return (
     <footer className="mt-24 bg-navy text-white">
@@ -13,11 +20,13 @@ export function Footer() {
             Premium residential and commercial removals across the UK. Trust us to take you home.
           </p>
           <div className="mt-6 flex gap-3">
-            {[Facebook, Instagram, Twitter, Linkedin].map((Icon, i) => (
+            {SOCIAL_LINKS.map(({ name, href, icon: Icon }) => (
               <a
-                key={i}
-                href="#"
-                aria-label="Social link"
+                key={name}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Visit Aspire Removals on ${name}`}
                 className="grid h-10 w-10 place-items-center rounded-full bg-white/5 hover:bg-accent transition-colors"
               >
                 <Icon className="h-4 w-4" />

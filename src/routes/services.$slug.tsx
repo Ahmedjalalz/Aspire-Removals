@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowRight, CheckCircle2, ChevronDown } from "lucide-react";
-import { SERVICE_BY_SLUG, SERVICES, type Service } from "@/lib/site";
+import { SERVICE_BY_SLUG, SERVICES, SITE, type Service } from "@/lib/site";
 import { SERVICE_IMAGES } from "@/lib/service-images";
 import { PageHero } from "@/components/site/PageHero";
 import { Reveal } from "@/components/site/Reveal";
@@ -14,20 +14,105 @@ export const Route = createFileRoute("/services/$slug")({
   },
   head: ({ loaderData }) => {
     const s = loaderData;
+    const title = s?.metaTitle || `${s?.title ?? "Service"} | Aspire Removals & Transport`;
+    const description = s?.metaDescription || s?.short || "";
+    const canonicalUrl = `${SITE.url}/services/${s?.slug}`;
+    const imageAlt = s?.imageAlt || `Aspire Removals & Transport - ${s?.title ?? "Service"}`;
+
     return {
       meta: [
-        { title: `${s?.title ?? "Service"} | Aspire Removals & Transport` },
-        { name: "description", content: s?.short ?? "" },
-        { property: "og:title", content: `${s?.title ?? "Service"} | Aspire Removals` },
-        { property: "og:description", content: s?.description ?? "" },
-        { property: "og:url", content: `/services/${s?.slug}` },
+        { title },
+        { name: "description", content: description },
+        { property: "og:title", content: title },
+        { property: "og:description", content: description },
+        { property: "og:url", content: canonicalUrl },
+        { property: "og:image", content: `${SITE.url}/Hero-Section-Image.png` },
+        { property: "og:image:width", content: "1600" },
+        { property: "og:image:height", content: "1200" },
+        { property: "og:image:alt", content: imageAlt },
+        { name: "twitter:card", content: "summary_large_image" },
+        { name: "twitter:title", content: title },
+        { name: "twitter:description", content: description },
+        { name: "twitter:image", content: `${SITE.url}/Hero-Section-Image.png` },
+        { name: "twitter:image:alt", content: imageAlt },
       ],
-      links: [{ rel: "canonical", href: `/services/${s?.slug}` }],
+      links: [{ rel: "canonical", href: canonicalUrl }],
+      scripts: s
+        ? [
+            {
+              type: "application/ld+json",
+              children: JSON.stringify({
+                "@context": "https://schema.org",
+                "@graph": [
+                  {
+                    "@type": "Service",
+                    "@id": `${canonicalUrl}#service`,
+                    name: s.title,
+                    description: s.description,
+                    serviceType: "Moving and Relocation Services",
+                    provider: {
+                      "@type": "MovingCompany",
+                      name: "Aspire Removals & Transport",
+                      url: SITE.url,
+                      telephone: SITE.phone,
+                      email: SITE.email,
+                    },
+                    areaServed: {
+                      "@type": "Country",
+                      name: "United Kingdom",
+                    },
+                    url: canonicalUrl,
+                  },
+                  {
+                    "@type": "FAQPage",
+                    "@id": `${canonicalUrl}#faq`,
+                    mainEntity: s.faqs.map((f) => ({
+                      "@type": "Question",
+                      name: f.q,
+                      acceptedAnswer: {
+                        "@type": "Answer",
+                        text: f.a,
+                      },
+                    })),
+                  },
+                  {
+                    "@type": "BreadcrumbList",
+                    itemListElement: [
+                      {
+                        "@type": "ListItem",
+                        position: 1,
+                        name: "Home",
+                        item: `${SITE.url}/`,
+                      },
+                      {
+                        "@type": "ListItem",
+                        position: 2,
+                        name: "Services",
+                        item: `${SITE.url}/services`,
+                      },
+                      {
+                        "@type": "ListItem",
+                        position: 3,
+                        name: s.title,
+                        item: canonicalUrl,
+                      },
+                    ],
+                  },
+                ],
+              }),
+            },
+          ]
+        : [],
     };
   },
   notFoundComponent: () => (
     <div className="min-h-screen grid place-items-center pt-24">
-      <p>Service not found. <Link to="/services" className="text-primary underline">All services</Link></p>
+      <p>
+        Service not found.{" "}
+        <Link to="/services" className="text-primary underline">
+          All services
+        </Link>
+      </p>
     </div>
   ),
   component: ServiceDetail,
@@ -62,7 +147,7 @@ function ServiceDetail() {
             <div className="overflow-hidden rounded-3xl ring-1 ring-border shadow-lift">
               <img
                 src={img}
-                alt={s.title}
+                alt={s.imageAlt}
                 width={1600}
                 height={1000}
                 className="w-full h-[280px] md:h-[440px] object-cover transition-transform duration-[1200ms] ease-out hover:scale-105"
@@ -71,7 +156,6 @@ function ServiceDetail() {
           </Reveal>
         </section>
       )}
-
 
       {/* Benefits */}
       <section className="container-page mt-20">

@@ -2,21 +2,100 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHero } from "@/components/site/PageHero";
 import { Reveal } from "@/components/site/Reveal";
 import { PRODUCTS } from "@/lib/products";
+import { SITE } from "@/lib/site";
 
 export const Route = createFileRoute("/products")({
   head: () => ({
     meta: [
-      { title: "Moving Products & Materials | Aspire Removals & Transport" },
+      { title: "Moving Boxes & Packing Supplies UK | Aspire Removals" },
       {
         name: "description",
         content:
-          "Premium packing products and moving materials — boxes, tape, bubble wrap, shrink wrap and more. Request a quote.",
+          "Order premium packing supplies and moving materials in the UK: double-wall cardboard boxes, bubble wrap, heavy-duty tape, shrink wrap, and wardrobe boxes.",
       },
-      { property: "og:title", content: "Moving Products | Aspire Removals" },
-      { property: "og:description", content: "Premium packing products and moving materials — request a quote." },
-      { property: "og:url", content: "/products" },
+      { property: "og:title", content: "Moving Boxes & Packing Supplies UK | Aspire Removals" },
+      {
+        property: "og:description",
+        content:
+          "Order premium packing supplies and moving materials in the UK: double-wall boxes, bubble wrap, tape, shrink wrap, and wardrobe boxes.",
+      },
+      { property: "og:url", content: `${SITE.url}/products` },
+      { property: "og:image", content: `${SITE.url}/Large%20Boxes.jpeg` },
+      { property: "og:image:width", content: "1024" },
+      { property: "og:image:height", content: "1024" },
+      {
+        property: "og:image:alt",
+        content: "Aspire Removals double-wall cardboard moving boxes and packing supplies",
+      },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Moving Boxes & Packing Supplies UK | Aspire Removals" },
+      {
+        name: "twitter:description",
+        content:
+          "Order premium packing supplies and moving materials in the UK: double-wall boxes, bubble wrap, tape, shrink wrap, and wardrobe boxes.",
+      },
+      { name: "twitter:image", content: `${SITE.url}/Large%20Boxes.jpeg` },
+      {
+        name: "twitter:image:alt",
+        content: "Aspire Removals double-wall cardboard moving boxes and packing supplies",
+      },
     ],
-    links: [{ rel: "canonical", href: "/products" }],
+    links: [{ rel: "canonical", href: `${SITE.url}/products` }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "ItemList",
+              "@id": `${SITE.url}/products#itemlist`,
+              name: "Moving Products & Packing Materials",
+              description:
+                "Professional packing products and moving materials supplied by Aspire Removals & Transport.",
+              itemListElement: PRODUCTS.map((p, idx) => ({
+                "@type": "ListItem",
+                position: idx + 1,
+                item: {
+                  "@type": "Product",
+                  name: p.title,
+                  description: p.desc,
+                  image: p.img.startsWith("http") ? p.img : `${SITE.url}${p.img}`,
+                  url: `${SITE.url}/products`,
+                  brand: {
+                    "@type": "Brand",
+                    name: "Aspire Removals & Transport",
+                  },
+                  offers: {
+                    "@type": "Offer",
+                    priceCurrency: "GBP",
+                    availability: "https://schema.org/InStock",
+                    url: `${SITE.url}/product-quote?selected=${p.id}`,
+                  },
+                },
+              })),
+            },
+            {
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                {
+                  "@type": "ListItem",
+                  position: 1,
+                  name: "Home",
+                  item: `${SITE.url}/`,
+                },
+                {
+                  "@type": "ListItem",
+                  position: 2,
+                  name: "Products",
+                  item: `${SITE.url}/products`,
+                },
+              ],
+            },
+          ],
+        }),
+      },
+    ],
   }),
   component: Products,
 });
@@ -38,7 +117,7 @@ function Products() {
                 <div className="aspect-[4/3] bg-white overflow-hidden">
                   <img
                     src={p.img}
-                    alt={p.title}
+                    alt={p.alt}
                     width={1024}
                     height={1024}
                     loading="lazy"

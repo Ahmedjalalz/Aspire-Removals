@@ -4,6 +4,7 @@ import { PageHero } from "@/components/site/PageHero";
 import { Reveal } from "@/components/site/Reveal";
 import { CTASection } from "@/components/site/CTASection";
 import { Compass, Target, HeartHandshake, Award } from "lucide-react";
+import { SITE } from "@/lib/site";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -12,13 +13,74 @@ export const Route = createFileRoute("/about")({
       {
         name: "description",
         content:
-          "Meet the family-run UK removals company redefining what customers expect from a moving service. Our story, mission and values.",
+          "Learn about Aspire Removals & Transport, a premier family-run UK removals company. Discover our story, expert moving team, values, and 5-star reputation.",
       },
-      { property: "og:title", content: "About Aspire Removals & Transport" },
-      { property: "og:description", content: "Family-run UK removals company built on trust, care and craftsmanship." },
-      { property: "og:url", content: "/about" },
+      { property: "og:title", content: "About Aspire Removals & Transport | Trusted UK Movers" },
+      {
+        property: "og:description",
+        content:
+          "Family-run UK removals company built on trust, care and craftsmanship. Fully insured house moves and office relocations nationwide.",
+      },
+      { property: "og:url", content: `${SITE.url}/about` },
+      { property: "og:image", content: `${SITE.url}/Hero-Section-Image.png` },
+      { property: "og:image:width", content: "1600" },
+      { property: "og:image:height", content: "1200" },
+      {
+        property: "og:image:alt",
+        content: "Aspire Removals & Transport team and fleet in the UK",
+      },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "About Aspire Removals & Transport | Trusted UK Movers" },
+      {
+        name: "twitter:description",
+        content:
+          "Family-run UK removals company built on trust, care and craftsmanship. House moves, office relocation, packing and storage.",
+      },
+      { name: "twitter:image", content: `${SITE.url}/Hero-Section-Image.png` },
+      {
+        name: "twitter:image:alt",
+        content: "Aspire Removals & Transport team and fleet in the UK",
+      },
     ],
-    links: [{ rel: "canonical", href: "/about" }],
+    links: [{ rel: "canonical", href: `${SITE.url}/about` }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "AboutPage",
+              "@id": `${SITE.url}/about#webpage`,
+              url: `${SITE.url}/about`,
+              name: "About Aspire Removals & Transport | Trusted UK Movers",
+              description:
+                "Meet the family-run UK removals company redefining what customers expect from a moving service.",
+              isPartOf: {
+                "@id": `${SITE.url}/#website`,
+              },
+            },
+            {
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                {
+                  "@type": "ListItem",
+                  position: 1,
+                  name: "Home",
+                  item: `${SITE.url}/`,
+                },
+                {
+                  "@type": "ListItem",
+                  position: 2,
+                  name: "About Us",
+                  item: `${SITE.url}/about`,
+                },
+              ],
+            },
+          ],
+        }),
+      },
+    ],
   }),
   component: About,
 });

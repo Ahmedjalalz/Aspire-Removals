@@ -8,7 +8,7 @@ export function Logo({
   return (
     <img
       src="/Aspire-nav-logo.png"
-      alt="Aspire Removals & Transport"
+      alt="Aspire Removals & Transport Logo"
       className={className}
       style={invert ? { filter: "brightness(0) invert(1)" } : undefined}
       width={320}

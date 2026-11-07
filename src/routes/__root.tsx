@@ -13,6 +13,7 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/site/Footer";
+import { SITE } from "@/lib/site";
 
 function NotFoundComponent() {
   return (
@@ -83,6 +84,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
+      {
+        name: "robots",
+        content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      },
+      {
+        name: "googlebot",
+        content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      },
       { title: "Aspire Removals & Transport | UK Home & Office Movers" },
       {
         name: "description",
@@ -92,18 +101,37 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "author", content: "Aspire Removals & Transport" },
       { name: "theme-color", content: "#005F86" },
       { property: "og:site_name", content: "Aspire Removals & Transport" },
+      { property: "og:locale", content: "en_GB" },
+      { property: "og:type", content: "website" },
       { property: "og:title", content: "Aspire Removals & Transport | UK Home & Office Movers" },
       {
         property: "og:description",
         content:
           "Reliable UK removals and transport. House moves, office relocation, packing and furniture delivery — trust us to take you home.",
       },
-      { property: "og:type", content: "website" },
+      {
+        property: "og:image",
+        content: `${SITE.url}/Hero-Section-Image.png`,
+      },
+      { property: "og:image:width", content: "1600" },
+      { property: "og:image:height", content: "1200" },
+      {
+        property: "og:image:alt",
+        content: "Aspire Removals & Transport modern fleet vehicle ready for UK removals",
+      },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Aspire Removals & Transport" },
+      { name: "twitter:title", content: "Aspire Removals & Transport | UK Home & Office Movers" },
       {
         name: "twitter:description",
         content: "Premium UK removals — house, office, packing and transport.",
+      },
+      {
+        name: "twitter:image",
+        content: `${SITE.url}/Hero-Section-Image.png`,
+      },
+      {
+        name: "twitter:image:alt",
+        content: "Aspire Removals & Transport modern fleet vehicle ready for UK removals",
       },
     ],
     links: [
@@ -121,21 +149,70 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         type: "application/ld+json",
         children: JSON.stringify({
           "@context": "https://schema.org",
-          "@type": "MovingCompany",
-          name: "Aspire Removals & Transport",
-          description:
-            "UK removals and transport company offering house removals, office relocation, packing services and furniture transport.",
-          areaServed: "United Kingdom",
-          url: "https://www.aspireremovalsandtransport.co.uk",
-          telephone: "07493 732371",
-          email: "info@aspireremovals.co.uk",
-          address: {
-            "@type": "PostalAddress",
-            streetAddress: "167 Henley Avenue",
-            addressLocality: "Sutton",
-            postalCode: "SM3 9SD",
-            addressCountry: "GB",
-          },
+          "@graph": [
+            {
+              "@type": "MovingCompany",
+              "@id": `${SITE.url}/#organization`,
+              name: "Aspire Removals & Transport",
+              url: SITE.url,
+              logo: `${SITE.url}/Aspire-nav-logo.png`,
+              image: `${SITE.url}/Hero-Section-Image.png`,
+              description:
+                "UK removals and transport company offering house removals, office relocation, packing services and furniture transport.",
+              telephone: SITE.phone,
+              email: SITE.email,
+              priceRange: "££",
+              currenciesAccepted: "GBP",
+              paymentAccepted: "Cash, Credit Card, Bank Transfer",
+              areaServed: {
+                "@type": "Country",
+                name: "United Kingdom",
+              },
+              address: {
+                "@type": "PostalAddress",
+                streetAddress: "167 Henley Avenue",
+                addressLocality: "Sutton",
+                postalCode: "SM3 9SD",
+                addressCountry: "GB",
+              },
+              geo: {
+                "@type": "GeoCoordinates",
+                latitude: "51.3656",
+                longitude: "-0.1963",
+              },
+              openingHoursSpecification: [
+                {
+                  "@type": "OpeningHoursSpecification",
+                  dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+                  opens: "07:00",
+                  closes: "19:00",
+                },
+                {
+                  "@type": "OpeningHoursSpecification",
+                  dayOfWeek: "Saturday",
+                  opens: "08:00",
+                  closes: "17:00",
+                },
+              ],
+              sameAs: [
+                "https://www.facebook.com/aspireremovals",
+                "https://www.instagram.com/aspireremovals",
+                "https://twitter.com/aspireremovals",
+                "https://www.linkedin.com/company/aspire-removals",
+              ],
+            },
+            {
+              "@type": "WebSite",
+              "@id": `${SITE.url}/#website`,
+              url: SITE.url,
+              name: "Aspire Removals & Transport",
+              description: "UK removals, house moves, office relocations, packing and storage.",
+              publisher: {
+                "@id": `${SITE.url}/#organization`,
+              },
+              inLanguage: "en-GB",
+            },
+          ],
         }),
       },
     ],
@@ -148,11 +225,17 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en-GB">
       <head>
         <HeadContent />
       </head>
       <body>
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-primary-foreground focus:shadow-lift focus:outline-none"
+        >
+          Skip to main content
+        </a>
         {children}
         <Scripts />
       </body>

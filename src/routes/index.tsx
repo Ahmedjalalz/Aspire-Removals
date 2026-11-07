@@ -34,10 +34,29 @@ export const Route = createFileRoute("/")({
         content:
           "Reliable, premium removals across the UK — house moves, office relocation, packing and furniture transport.",
       },
-      { property: "og:url", content: "/" },
+      { property: "og:url", content: `${SITE.url}/` },
+      { property: "og:image", content: `${SITE.url}/Hero-Section-Image.png` },
+      { property: "og:image:width", content: "1600" },
+      { property: "og:image:height", content: "1200" },
+      {
+        property: "og:image:alt",
+        content: "Aspire Removals & Transport modern fleet vehicle ready for UK removals",
+      },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Aspire Removals & Transport | Reliable UK House & Office Movers" },
+      {
+        name: "twitter:description",
+        content:
+          "Reliable, premium removals across the UK — house moves, office relocation, packing services and furniture transport.",
+      },
+      { name: "twitter:image", content: `${SITE.url}/Hero-Section-Image.png` },
+      {
+        name: "twitter:image:alt",
+        content: "Aspire Removals & Transport modern fleet vehicle ready for UK removals",
+      },
     ],
     links: [
-      { rel: "canonical", href: "/" },
+      { rel: "canonical", href: `${SITE.url}/` },
       {
         rel: "preload",
         as: "image",
@@ -162,7 +181,7 @@ function Home() {
               <div className="overflow-hidden rounded-[2rem] ring-1 ring-white/10 shadow-2xl">
                 <img
                   src="/Hero-Section-Image.png"
-                  alt="Aspire Removals & Transport branded moving truck"
+                  alt="Aspire Removals & Transport modern fleet vehicle ready for UK home and commercial relocations"
                   width={1600}
                   height={1200}
                   className="w-full h-auto object-cover"
@@ -221,7 +240,7 @@ function Home() {
                   <div className="relative aspect-[4/3] overflow-hidden">
                     <img
                       src={img}
-                      alt={s.title}
+                      alt={s.imageAlt}
                       loading="lazy"
                       width={1200}
                       height={800}
@@ -393,6 +412,8 @@ function Home() {
                   <img
                     src={g.src}
                     alt={g.alt}
+                    width={800}
+                    height={600}
                     loading="lazy"
                     className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                   />

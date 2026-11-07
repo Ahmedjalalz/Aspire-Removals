@@ -3,19 +3,68 @@ import { PageHero } from "@/components/site/PageHero";
 import { Reveal } from "@/components/site/Reveal";
 import { sendEmail } from "@/lib/send-email-client";
 import { CheckCircle2, ShieldCheck } from "lucide-react";
-import { SERVICES } from "@/lib/site";
+import { SERVICES, SITE } from "@/lib/site";
 import { useState } from "react";
 
 export const Route = createFileRoute("/quote")({
   head: () => ({
     meta: [
-      { title: "Get a Free Quote | Aspire Removals & Transport" },
-      { name: "description", content: "Request a fast, transparent, no-obligation moving quote from Aspire Removals & Transport." },
-      { property: "og:title", content: "Get a Free Quote | Aspire Removals" },
-      { property: "og:description", content: "Fast, transparent moving quote — replied to within 24 hours." },
-      { property: "og:url", content: "/quote" },
+      { title: "Free Moving Quote | House & Office Removals | Aspire Removals" },
+      {
+        name: "description",
+        content:
+          "Get a free, transparent, fixed-price removal quote within 24 hours. No hidden fees, fully insured house moves, office relocations, and transport across the UK.",
+      },
+      { property: "og:title", content: "Free Moving Quote | House & Office Removals | Aspire Removals" },
+      {
+        property: "og:description",
+        content:
+          "Request a fast, transparent fixed-price moving quote from Aspire Removals & Transport. Reliable UK removals with no hidden costs.",
+      },
+      { property: "og:url", content: `${SITE.url}/quote` },
+      { property: "og:image", content: `${SITE.url}/Hero-Section-Image.png` },
+      { property: "og:image:width", content: "1600" },
+      { property: "og:image:height", content: "1200" },
+      {
+        property: "og:image:alt",
+        content: "Aspire Removals & Transport moving fleet in the UK",
+      },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Free Moving Quote | House & Office Removals | Aspire Removals" },
+      {
+        name: "twitter:description",
+        content: "Get a free, transparent, fixed-price removal quote within 24 hours. Reliable UK movers.",
+      },
+      { name: "twitter:image", content: `${SITE.url}/Hero-Section-Image.png` },
+      {
+        name: "twitter:image:alt",
+        content: "Aspire Removals & Transport moving fleet in the UK",
+      },
     ],
-    links: [{ rel: "canonical", href: "/quote" }],
+    links: [{ rel: "canonical", href: `${SITE.url}/quote` }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            {
+              "@type": "ListItem",
+              position: 1,
+              name: "Home",
+              item: `${SITE.url}/`,
+            },
+            {
+              "@type": "ListItem",
+              position: 2,
+              name: "Get a Quote",
+              item: `${SITE.url}/quote`,
+            },
+          ],
+        }),
+      },
+    ],
   }),
   component: Quote,
 });
