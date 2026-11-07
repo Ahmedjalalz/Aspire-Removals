@@ -13,7 +13,7 @@ export const Route = createFileRoute("/services/")({
       {
         name: "description",
         content:
-          "Explore full-service UK removals and logistics by Aspire Removals: house moves, office relocations, secure storage, packing services, and man & van transport.",
+          "Explore full-service UK removals & logistics by Aspire Removals: house moves, office relocations, secure storage, packing services and man & van transport.",
       },
       { property: "og:title", content: "UK Removals & Transport Services | Aspire Removals" },
       {

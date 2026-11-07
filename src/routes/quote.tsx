@@ -13,7 +13,7 @@ export const Route = createFileRoute("/quote")({
       {
         name: "description",
         content:
-          "Get a free, transparent, fixed-price removal quote within 24 hours. No hidden fees, fully insured house moves, office relocations, and transport across the UK.",
+          "Get a free, transparent, fixed-price removal quote in 24 hours. No hidden fees, fully insured house moves, office relocations, and transport across the UK.",
       },
       { property: "og:title", content: "Free Moving Quote | House & Office Removals | Aspire Removals" },
       {
