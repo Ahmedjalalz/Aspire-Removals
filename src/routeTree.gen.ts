@@ -16,6 +16,7 @@ import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as ProductQuoteRouteImport } from './routes/product-quote'
 import { Route as ProductsRouteImport } from './routes/products'
 import { Route as QuoteRouteImport } from './routes/quote'
+import { Route as RemovalsCroydonRouteImport } from './routes/removals-croydon'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as TermsRouteImport } from './routes/terms'
@@ -57,6 +58,11 @@ const QuoteRoute = QuoteRouteImport.update({
   path: '/quote',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RemovalsCroydonRoute = RemovalsCroydonRouteImport.update({
+  id: '/removals-croydon',
+  path: '/removals-croydon',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ServicesRoute = ServicesRouteImport.update({
   id: '/services',
   path: '/services',
@@ -91,6 +97,7 @@ export interface FileRoutesByFullPath {
   '/product-quote': typeof ProductQuoteRoute
   '/products': typeof ProductsRoute
   '/quote': typeof QuoteRoute
+  '/removals-croydon': typeof RemovalsCroydonRoute
   '/services': typeof ServicesRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
@@ -105,6 +112,7 @@ export interface FileRoutesByTo {
   '/product-quote': typeof ProductQuoteRoute
   '/products': typeof ProductsRoute
   '/quote': typeof QuoteRoute
+  '/removals-croydon': typeof RemovalsCroydonRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/services/$slug': typeof ServicesSlugRoute
@@ -119,6 +127,7 @@ export interface FileRoutesById {
   '/product-quote': typeof ProductQuoteRoute
   '/products': typeof ProductsRoute
   '/quote': typeof QuoteRoute
+  '/removals-croydon': typeof RemovalsCroydonRoute
   '/services': typeof ServicesRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
@@ -135,6 +144,7 @@ export interface FileRouteTypes {
     | '/product-quote'
     | '/products'
     | '/quote'
+    | '/removals-croydon'
     | '/services'
     | '/sitemap.xml'
     | '/terms'
@@ -149,6 +159,7 @@ export interface FileRouteTypes {
     | '/product-quote'
     | '/products'
     | '/quote'
+    | '/removals-croydon'
     | '/sitemap.xml'
     | '/terms'
     | '/services/$slug'
@@ -162,6 +173,7 @@ export interface FileRouteTypes {
     | '/product-quote'
     | '/products'
     | '/quote'
+    | '/removals-croydon'
     | '/services'
     | '/sitemap.xml'
     | '/terms'
@@ -177,6 +189,7 @@ export interface RootRouteChildren {
   ProductQuoteRoute: typeof ProductQuoteRoute
   ProductsRoute: typeof ProductsRoute
   QuoteRoute: typeof QuoteRoute
+  RemovalsCroydonRoute: typeof RemovalsCroydonRoute
   ServicesRoute: typeof ServicesRouteWithChildren
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TermsRoute: typeof TermsRoute
@@ -231,6 +244,13 @@ declare module '@tanstack/react-router' {
       path: '/quote'
       fullPath: '/quote'
       preLoaderRoute: typeof QuoteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/removals-croydon': {
+      id: '/removals-croydon'
+      path: '/removals-croydon'
+      fullPath: '/removals-croydon'
+      preLoaderRoute: typeof RemovalsCroydonRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/services': {
@@ -293,6 +313,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProductQuoteRoute: ProductQuoteRoute,
   ProductsRoute: ProductsRoute,
   QuoteRoute: QuoteRoute,
+  RemovalsCroydonRoute: RemovalsCroydonRoute,
   ServicesRoute: ServicesRouteWithChildren,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TermsRoute: TermsRoute,
