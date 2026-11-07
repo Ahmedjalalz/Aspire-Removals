@@ -44,6 +44,7 @@ export function Footer() {
               { to: "/products", label: "Products" },
               { to: "/quote", label: "Get a Quote" },
               { to: "/removals-croydon", label: "Removals Croydon" },
+              { to: "/removals-mitcham", label: "Removals Mitcham" },
               { to: "/contact", label: "Contact" },
             ].map((l) => (
               <li key={l.to}>

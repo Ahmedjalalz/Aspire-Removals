@@ -27,6 +27,7 @@ export function getSitemapItems(): SitemapItem[] {
     { path: "/about", changefreq: "monthly", priority: "0.8", lastmod: DEFAULT_LASTMOD },
     { path: "/contact", changefreq: "monthly", priority: "0.8", lastmod: DEFAULT_LASTMOD },
     { path: "/removals-croydon", changefreq: "weekly", priority: "0.9", lastmod: DEFAULT_LASTMOD },
+    { path: "/removals-mitcham", changefreq: "weekly", priority: "0.9", lastmod: DEFAULT_LASTMOD },
     { path: "/terms", changefreq: "yearly", priority: "0.5", lastmod: DEFAULT_LASTMOD },
     { path: "/privacy", changefreq: "yearly", priority: "0.5", lastmod: DEFAULT_LASTMOD },
   ];
