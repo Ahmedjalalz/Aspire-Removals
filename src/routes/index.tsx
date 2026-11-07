@@ -12,6 +12,7 @@ import {
   PackageCheck,
   Home as HomeIcon,
   Sparkles,
+  Compass,
 } from "lucide-react";
 import { TOP_SERVICES, SITE } from "@/lib/site";
 import { SERVICE_IMAGES, GALLERY_IMAGES } from "@/lib/service-images";
@@ -209,8 +210,6 @@ function Home() {
           </svg>
         </div>
       </section>
-
-
 
       {/* SERVICES OVERVIEW */}
       <section className="container-page mt-24">
@@ -428,8 +427,107 @@ function Home() {
         </div>
       </section>
 
-      <CTASection />
+      {/* SERVICE AREAS & NATIONWIDE COVERAGE */}
+      <section id="service-areas" className="container-page mt-28">
+        <div className="max-w-3xl">
+          <Reveal>
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">Coverage &amp; Locations</p>
+            <h2 className="mt-3 text-3xl md:text-4xl lg:text-5xl text-navy">
+              Nationwide UK coverage with <span className="text-gradient-brand">local expertise</span>
+            </h2>
+            <p className="mt-4 text-muted-foreground text-lg leading-relaxed">
+              Operating from our Greater London headquarters in Sutton, Aspire Removals &amp; Transport moves homes and businesses across England, Scotland, and Wales. Explore our dedicated local guides or arrange your move anywhere nationwide.
+            </p>
+          </Reveal>
+        </div>
 
+        <div className="mt-12 grid gap-6 md:grid-cols-3">
+          {/* Card 1: Nationwide Coverage */}
+          <Reveal delay={0}>
+            <div className="h-full rounded-2xl bg-card border border-border p-7 shadow-soft flex flex-col justify-between">
+              <div>
+                <div className="grid h-12 w-12 place-items-center rounded-xl bg-primary/10 text-primary">
+                  <Compass className="h-6 w-6" />
+                </div>
+                <h3 className="mt-5 text-xl font-semibold text-navy">Across All of the UK</h3>
+                <p className="mt-2.5 text-sm text-muted-foreground leading-relaxed">
+                  Relocating cross-country or moving between cities? Our modern GPS-tracked fleet and uniformed crews handle residential and commercial moves throughout England, Scotland, and Wales.
+                </p>
+              </div>
+              <div className="mt-6 pt-4 border-t border-border">
+                <Link
+                  to="/quote"
+                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:text-accent transition-colors"
+                >
+                  Get a nationwide quote <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
+            </div>
+          </Reveal>
+
+          {/* Card 2: Croydon */}
+          <Reveal delay={80}>
+            <div className="h-full rounded-2xl bg-card border border-border p-7 shadow-soft card-lift flex flex-col justify-between group">
+              <div>
+                <div className="grid h-12 w-12 place-items-center rounded-xl bg-accent/15 text-navy">
+                  <MapPin className="h-6 w-6 text-primary" />
+                </div>
+                <div className="mt-5 flex items-center justify-between">
+                  <h3 className="text-xl font-semibold text-navy group-hover:text-primary transition-colors">
+                    Removals Croydon
+                  </h3>
+                  <span className="text-[11px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full bg-primary/10 text-primary">
+                    Local Guide
+                  </span>
+                </div>
+                <p className="mt-2.5 text-sm text-muted-foreground leading-relaxed">
+                  Full-service house removals, office relocations, and man with a van across South Croydon, Addiscombe, Purley, Sanderstead, and all CR postcodes.
+                </p>
+              </div>
+              <div className="mt-6 pt-4 border-t border-border">
+                <Link
+                  to="/removals-croydon"
+                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary group-hover:gap-2 transition-all"
+                >
+                  Explore Croydon removals <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
+            </div>
+          </Reveal>
+
+          {/* Card 3: Mitcham */}
+          <Reveal delay={160}>
+            <div className="h-full rounded-2xl bg-card border border-border p-7 shadow-soft card-lift flex flex-col justify-between group">
+              <div>
+                <div className="grid h-12 w-12 place-items-center rounded-xl bg-accent/15 text-navy">
+                  <MapPin className="h-6 w-6 text-primary" />
+                </div>
+                <div className="mt-5 flex items-center justify-between">
+                  <h3 className="text-xl font-semibold text-navy group-hover:text-primary transition-colors">
+                    Removals Mitcham
+                  </h3>
+                  <span className="text-[11px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full bg-primary/10 text-primary">
+                    Local Guide
+                  </span>
+                </div>
+                <p className="mt-2.5 text-sm text-muted-foreground leading-relaxed">
+                  Local home moving, flat relocations, packing, and furniture transport across Mitcham Common, Pollards Hill, Tooting, Colliers Wood, and CR4.
+                </p>
+              </div>
+              <div className="mt-6 pt-4 border-t border-border">
+                <Link
+                  to="/removals-mitcham"
+                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary group-hover:gap-2 transition-all"
+                >
+                  Explore Mitcham removals <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      <CTASection />
 
       {/* CONTACT PREVIEW */}
       <section className="container-page my-24">
@@ -495,4 +593,3 @@ function Home() {
     </>
   );
 }
-

@@ -1,13 +1,18 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown, Compass } from "lucide-react";
 import { Logo } from "./Logo";
 import { cn } from "@/lib/utils";
 import { NAV_SERVICES } from "@/lib/site";
 
-const NAV = [
+type NavItem =
+  | { to: string; label: string; dropdown?: undefined; hash?: undefined }
+  | { to: string; label: string; dropdown: "services" | "areas"; hash?: string };
+
+const NAV: NavItem[] = [
   { to: "/", label: "Home" },
-  { to: "/services", label: "Services", hasDropdown: true as const },
+  { to: "/services", label: "Services", dropdown: "services" },
+  { to: "/", label: "Areas", dropdown: "areas", hash: "service-areas" },
   { to: "/products", label: "Products" },
   { to: "/about", label: "About" },
   { to: "/contact", label: "Contact" },
@@ -17,6 +22,7 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+  const [mobileAreasOpen, setMobileAreasOpen] = useState(false);
   const { location } = useRouterState();
   const isHome = location.pathname === "/";
 
@@ -30,6 +36,7 @@ export function Navbar() {
   useEffect(() => {
     setOpen(false);
     setMobileServicesOpen(false);
+    setMobileAreasOpen(false);
   }, [location.pathname]);
 
   const solid = scrolled || !isHome || open;
@@ -50,25 +57,30 @@ export function Navbar() {
 
         <nav className="hidden lg:flex items-center gap-1" aria-label="Primary">
           {NAV.map((item) =>
-            item.hasDropdown ? (
-              <div key={item.to} className="relative group">
+            item.dropdown ? (
+              <div key={item.label} className="relative group">
                 <Link
                   to={item.to}
+                  hash={item.hash}
                   className={cn(
                     "inline-flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-md transition-colors",
                     solid ? "text-navy hover:text-primary" : "text-white/90 hover:text-white",
                   )}
-                  activeProps={{
-                    className: cn(
-                      "inline-flex items-center gap-1 px-3 py-2 text-sm font-semibold rounded-md",
-                      solid ? "text-primary" : "text-white",
-                    ),
-                  }}
+                  activeProps={
+                    item.dropdown === "services"
+                      ? {
+                          className: cn(
+                            "inline-flex items-center gap-1 px-3 py-2 text-sm font-semibold rounded-md",
+                            solid ? "text-primary" : "text-white",
+                          ),
+                        }
+                      : undefined
+                  }
                 >
                   {item.label}
                   <ChevronDown className="h-3.5 w-3.5 transition-transform group-hover:rotate-180" />
                 </Link>
-                <ServicesDropdown />
+                {item.dropdown === "services" ? <ServicesDropdown /> : <AreasDropdown />}
               </div>
             ) : (
               <Link
@@ -117,60 +129,132 @@ export function Navbar() {
       {open && (
         <div className="lg:hidden border-t border-border bg-white">
           <nav className="container-page py-4 flex flex-col" aria-label="Mobile">
-            {NAV.map((item) =>
-              item.hasDropdown ? (
-                <div key={item.to} className="border-b border-border/60 pb-2 mb-2">
-                  <div className="flex items-center justify-between">
-                    <Link
-                      to={item.to}
-                      className="py-3 text-base font-medium text-navy hover:text-primary"
-                    >
-                      {item.label}
-                    </Link>
-                    <button
-                      type="button"
-                      onClick={() => setMobileServicesOpen((o) => !o)}
-                      aria-label="Toggle services submenu"
-                      className="p-2 text-navy"
-                    >
-                      <ChevronDown
-                        className={cn(
-                          "h-4 w-4 transition-transform",
-                          mobileServicesOpen && "rotate-180",
-                        )}
-                      />
-                    </button>
-                  </div>
-                  {mobileServicesOpen && (
-                    <ul className="pl-3 pb-2 space-y-1">
-                      {NAV_SERVICES.map((s) => (
-                        <li key={s.label}>
-                          <Link
-                            to={s.to}
-                            className="block py-2 text-sm font-medium text-navy hover:text-primary"
-                          >
-                            {s.label}
-                          </Link>
-                          {s.children && (
-                            <ul className="pl-4 border-l border-border/60 ml-1 space-y-1">
-                              {s.children.map((c) => (
-                                <li key={c.label}>
-                                  <Link
-                                    to={c.to}
-                                    className="block py-1.5 text-sm text-muted-foreground hover:text-primary"
-                                  >
-                                    {c.label}
-                                  </Link>
-                                </li>
-                              ))}
-                            </ul>
+            {NAV.map((item) => {
+              if (item.dropdown === "services") {
+                return (
+                  <div key={item.label} className="border-b border-border/60 pb-2 mb-2">
+                    <div className="flex items-center justify-between">
+                      <Link
+                        to={item.to}
+                        className="py-3 text-base font-medium text-navy hover:text-primary"
+                      >
+                        {item.label}
+                      </Link>
+                      <button
+                        type="button"
+                        onClick={() => setMobileServicesOpen((o) => !o)}
+                        aria-label="Toggle services submenu"
+                        className="p-2 text-navy"
+                      >
+                        <ChevronDown
+                          className={cn(
+                            "h-4 w-4 transition-transform",
+                            mobileServicesOpen && "rotate-180",
                           )}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
-              ) : (
+                        />
+                      </button>
+                    </div>
+                    {mobileServicesOpen && (
+                      <ul className="pl-3 pb-2 space-y-1">
+                        {NAV_SERVICES.map((s) => (
+                          <li key={s.label}>
+                            <Link
+                              to={s.to}
+                              className="block py-2 text-sm font-medium text-navy hover:text-primary"
+                            >
+                              {s.label}
+                            </Link>
+                            {s.children && (
+                              <ul className="pl-4 border-l border-border/60 ml-1 space-y-1">
+                                {s.children.map((c) => (
+                                  <li key={c.label}>
+                                    <Link
+                                      to={c.to}
+                                      className="block py-1.5 text-sm text-muted-foreground hover:text-primary"
+                                    >
+                                      {c.label}
+                                    </Link>
+                                  </li>
+                                ))}
+                              </ul>
+                            )}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                );
+              }
+
+              if (item.dropdown === "areas") {
+                return (
+                  <div key={item.label} className="border-b border-border/60 pb-2 mb-2">
+                    <div className="flex items-center justify-between">
+                      <Link
+                        to={item.to}
+                        hash={item.hash}
+                        className="py-3 text-base font-medium text-navy hover:text-primary"
+                      >
+                        {item.label}
+                      </Link>
+                      <button
+                        type="button"
+                        onClick={() => setMobileAreasOpen((o) => !o)}
+                        aria-label="Toggle areas submenu"
+                        className="p-2 text-navy"
+                      >
+                        <ChevronDown
+                          className={cn(
+                            "h-4 w-4 transition-transform",
+                            mobileAreasOpen && "rotate-180",
+                          )}
+                        />
+                      </button>
+                    </div>
+                    {mobileAreasOpen && (
+                      <div className="pl-3 pb-2 space-y-2">
+                        <div className="p-3 rounded-xl bg-section border border-border/60 text-xs">
+                          <div className="flex items-center gap-1.5 font-semibold text-primary">
+                            <Compass className="h-3.5 w-3.5 shrink-0" />
+                            <span>Nationwide UK Coverage</span>
+                          </div>
+                          <p className="mt-1 text-muted-foreground leading-relaxed">
+                            Full moving services across England, Scotland &amp; Wales from our Sutton base.
+                          </p>
+                        </div>
+                        <ul className="space-y-1">
+                          <li>
+                            <Link
+                              to="/removals-croydon"
+                              className="block py-1.5 text-sm font-medium text-navy hover:text-primary"
+                            >
+                              Removals Croydon
+                            </Link>
+                          </li>
+                          <li>
+                            <Link
+                              to="/removals-mitcham"
+                              className="block py-1.5 text-sm font-medium text-navy hover:text-primary"
+                            >
+                              Removals Mitcham
+                            </Link>
+                          </li>
+                          <li>
+                            <Link
+                              to="/quote"
+                              className="block py-1.5 text-xs font-semibold text-primary hover:underline"
+                            >
+                              Moving elsewhere in the UK? Get a Quote &rarr;
+                            </Link>
+                          </li>
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+                );
+              }
+
+              return (
                 <Link
                   key={item.to}
                   to={item.to}
@@ -180,8 +264,8 @@ export function Navbar() {
                 >
                   {item.label}
                 </Link>
-              ),
-            )}
+              );
+            })}
             <Link
               to="/contact"
               className="mt-3 inline-flex justify-center rounded-full bg-accent px-5 py-3 text-base font-semibold text-accent-foreground"
@@ -214,7 +298,7 @@ function ServicesDropdown() {
               {s.children && <ChevronDown className="h-3.5 w-3.5 -rotate-90 text-muted-foreground" />}
             </Link>
             {s.children && (
-              <div className="invisible opacity-0 group-hover/sub:visible group-hover/sub:opacity-100 absolute left-full top-0 pl-2 transition-all duration-150">
+              <div className="invisible opacity-0 group/sub-hover:visible group/sub-hover:opacity-100 group-hover/sub:visible group-hover/sub:opacity-100 absolute left-full top-0 pl-2 transition-all duration-150">
                 <ul className="w-64 rounded-2xl bg-white border border-border shadow-lift py-2">
                   {s.children.map((c) => (
                     <li key={c.label}>
@@ -232,6 +316,79 @@ function ServicesDropdown() {
           </li>
         ))}
       </ul>
+    </div>
+  );
+}
+
+function AreasDropdown() {
+  return (
+    <div
+      className={cn(
+        "invisible opacity-0 group-hover:visible group-hover:opacity-100 focus-within:visible focus-within:opacity-100",
+        "absolute left-0 top-full pt-3 transition-all duration-150 z-50",
+      )}
+    >
+      <div className="w-80 rounded-2xl bg-white border border-border shadow-lift p-3">
+        {/* UK-wide Banner */}
+        <div className="px-3.5 py-3 rounded-xl bg-section border border-border/60 mb-2">
+          <div className="flex items-center gap-2 text-primary font-semibold text-xs tracking-wider uppercase">
+            <Compass className="h-4 w-4 shrink-0" />
+            <span>Nationwide UK Coverage</span>
+          </div>
+          <p className="mt-1.5 text-xs text-muted-foreground leading-relaxed">
+            Operating nationwide across England, Scotland &amp; Wales from our Greater London base.
+          </p>
+        </div>
+
+        <p className="px-3 pt-1.5 pb-1 text-[11px] font-bold uppercase tracking-wider text-muted-foreground">
+          Dedicated Area Guides
+        </p>
+
+        <ul className="space-y-1">
+          <li>
+            <Link
+              to="/removals-croydon"
+              className="flex items-center justify-between px-3 py-2 rounded-xl text-navy hover:bg-section hover:text-primary transition-colors group/item"
+            >
+              <div>
+                <span className="block text-sm font-semibold text-navy group-hover/item:text-primary">
+                  Removals Croydon
+                </span>
+                <span className="block text-xs text-muted-foreground">
+                  South London &amp; CR postcodes
+                </span>
+              </div>
+              <ChevronDown className="h-3.5 w-3.5 -rotate-90 text-muted-foreground group-hover/item:text-primary transition-transform" />
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/removals-mitcham"
+              className="flex items-center justify-between px-3 py-2 rounded-xl text-navy hover:bg-section hover:text-primary transition-colors group/item"
+            >
+              <div>
+                <span className="block text-sm font-semibold text-navy group-hover/item:text-primary">
+                  Removals Mitcham
+                </span>
+                <span className="block text-xs text-muted-foreground">
+                  Mitcham Common &amp; CR4 area
+                </span>
+              </div>
+              <ChevronDown className="h-3.5 w-3.5 -rotate-90 text-muted-foreground group-hover/item:text-primary transition-transform" />
+            </Link>
+          </li>
+        </ul>
+
+        <div className="mt-2 pt-2.5 border-t border-border/60 px-3">
+          <Link
+            to="/quote"
+            className="flex items-center justify-between text-xs font-semibold text-primary hover:text-navy transition-colors py-1"
+          >
+            <span>Moving elsewhere in the UK?</span>
+            <span className="text-accent hover:underline">Get a Quote &rarr;</span>
+          </Link>
+        </div>
+      </div>
     </div>
   );
 }
