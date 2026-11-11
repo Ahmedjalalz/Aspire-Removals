@@ -115,7 +115,7 @@ const SECTIONS = [
   },
   {
     h: "Your rights",
-    p: "You have the right to access, correct, delete or object to the processing of your personal data. To exercise any of these rights, contact info@aspireremovals.co.uk.",
+    p: "You have the right to access, correct, delete or object to the processing of your personal data. To exercise any of these rights, contact info@aspireremovalsandtransport.co.uk.",
   },
   {
     h: "Cookies",
@@ -123,6 +123,6 @@ const SECTIONS = [
   },
   {
     h: "Contact",
-    p: "For any privacy-related question, contact us at info@aspireremovals.co.uk or by post to our head office listed on the Contact page.",
+    p: "For any privacy-related question, contact us at info@aspireremovalsandtransport.co.uk or by post to our head office listed on the Contact page.",
   },
 ];

@@ -16,7 +16,7 @@ export const SITE = {
   short: "Aspire Removals",
   tagline: "Trust Us Take You Home",
   phone: "07493 732371",
-  email: "info@aspireremovals.co.uk",
+  email: "info@aspireremovalsandtransport.co.uk",
   address: "20A Reynolds Road, New Malden, KT3 5NG",
   url: "https://www.aspireremovalsandtransport.co.uk",
   hours: [

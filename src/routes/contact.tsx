@@ -18,7 +18,7 @@ export const Route = createFileRoute("/contact")({
       {
         property: "og:description",
         content:
-          "Reach our UK removals team — call 07493 732371, email info@aspireremovals.co.uk or send a message. Fast response 7 days a week.",
+          "Reach our UK removals team — call 07493 732371, email info@aspireremovalsandtransport.co.uk or send a message. Fast response 7 days a week.",
       },
       { property: "og:url", content: `${SITE.url}/contact` },
       { property: "og:image", content: `${SITE.url}/Hero-Section-Image.png` },
@@ -33,7 +33,7 @@ export const Route = createFileRoute("/contact")({
       {
         name: "twitter:description",
         content:
-          "Reach our UK removals team — call 07493 732371, email info@aspireremovals.co.uk or message our coordinators.",
+          "Reach our UK removals team — call 07493 732371, email info@aspireremovalsandtransport.co.uk or message our coordinators.",
       },
       { name: "twitter:image", content: `${SITE.url}/Hero-Section-Image.png` },
       {
