@@ -172,6 +172,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
                 "@type": "PostalAddress",
                 streetAddress: "20A Reynolds Road",
                 addressLocality: "New Malden",
+                addressRegion: "Greater London",
                 postalCode: "KT3 5NG",
                 addressCountry: "GB",
               },

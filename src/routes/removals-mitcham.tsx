@@ -84,6 +84,7 @@ export const Route = createFileRoute("/removals-mitcham")({
                   "@type": "PostalAddress",
                   streetAddress: "20A Reynolds Road",
                   addressLocality: "New Malden",
+                  addressRegion: "Greater London",
                   postalCode: "KT3 5NG",
                   addressCountry: "GB",
                 },
