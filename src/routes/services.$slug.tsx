@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowRight, CheckCircle2, ChevronDown } from "lucide-react";
-import { SERVICE_BY_SLUG, SERVICES, SITE, type Service } from "@/lib/site";
+import { SERVICE_BY_SLUG, SERVICES, SITE } from "@/lib/site";
 import { SERVICE_IMAGES } from "@/lib/service-images";
 import { PageHero } from "@/components/site/PageHero";
 import { Reveal } from "@/components/site/Reveal";
@@ -10,14 +10,17 @@ export const Route = createFileRoute("/services/$slug")({
   loader: ({ params }) => {
     const service = SERVICE_BY_SLUG[params.slug];
     if (!service) throw notFound();
-    return service;
+    return { slug: service.slug };
   },
-  head: ({ loaderData }) => {
-    const s = loaderData;
-    const title = s?.metaTitle || `${s?.title ?? "Service"} | Aspire Removals & Transport`;
-    const description = s?.metaDescription || s?.short || "";
-    const canonicalUrl = `${SITE.url}/services/${s?.slug}`;
-    const imageAlt = s?.imageAlt || `Aspire Removals & Transport - ${s?.title ?? "Service"}`;
+  head: ({ params, loaderData }) => {
+    const slug = loaderData?.slug || params?.slug;
+    const s = slug ? SERVICE_BY_SLUG[slug] : undefined;
+    if (!s) return {};
+
+    const title = s.metaTitle || `${s.title} | Aspire Removals & Transport`;
+    const description = s.metaDescription || s.short || "";
+    const canonicalUrl = `${SITE.url}/services/${s.slug}`;
+    const imageAlt = s.imageAlt || `Aspire Removals & Transport - ${s.title}`;
 
     return {
       meta: [
@@ -37,72 +40,70 @@ export const Route = createFileRoute("/services/$slug")({
         { name: "twitter:image:alt", content: imageAlt },
       ],
       links: [{ rel: "canonical", href: canonicalUrl }],
-      scripts: s
-        ? [
-            {
-              type: "application/ld+json",
-              children: JSON.stringify({
-                "@context": "https://schema.org",
-                "@graph": [
+      scripts: [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "Service",
+                "@id": `${canonicalUrl}#service`,
+                name: s.title,
+                description: s.description,
+                serviceType: "Moving and Relocation Services",
+                provider: {
+                  "@type": "MovingCompany",
+                  name: "Aspire Removals & Transport",
+                  url: SITE.url,
+                  telephone: SITE.phone,
+                  email: SITE.email,
+                },
+                areaServed: {
+                  "@type": "Country",
+                  name: "United Kingdom",
+                },
+                url: canonicalUrl,
+              },
+              {
+                "@type": "FAQPage",
+                "@id": `${canonicalUrl}#faq`,
+                mainEntity: s.faqs.map((f) => ({
+                  "@type": "Question",
+                  name: f.q,
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: f.a,
+                  },
+                })),
+              },
+              {
+                "@type": "BreadcrumbList",
+                itemListElement: [
                   {
-                    "@type": "Service",
-                    "@id": `${canonicalUrl}#service`,
+                    "@type": "ListItem",
+                    position: 1,
+                    name: "Home",
+                    item: `${SITE.url}/`,
+                  },
+                  {
+                    "@type": "ListItem",
+                    position: 2,
+                    name: "Services",
+                    item: `${SITE.url}/services`,
+                  },
+                  {
+                    "@type": "ListItem",
+                    position: 3,
                     name: s.title,
-                    description: s.description,
-                    serviceType: "Moving and Relocation Services",
-                    provider: {
-                      "@type": "MovingCompany",
-                      name: "Aspire Removals & Transport",
-                      url: SITE.url,
-                      telephone: SITE.phone,
-                      email: SITE.email,
-                    },
-                    areaServed: {
-                      "@type": "Country",
-                      name: "United Kingdom",
-                    },
-                    url: canonicalUrl,
-                  },
-                  {
-                    "@type": "FAQPage",
-                    "@id": `${canonicalUrl}#faq`,
-                    mainEntity: s.faqs.map((f) => ({
-                      "@type": "Question",
-                      name: f.q,
-                      acceptedAnswer: {
-                        "@type": "Answer",
-                        text: f.a,
-                      },
-                    })),
-                  },
-                  {
-                    "@type": "BreadcrumbList",
-                    itemListElement: [
-                      {
-                        "@type": "ListItem",
-                        position: 1,
-                        name: "Home",
-                        item: `${SITE.url}/`,
-                      },
-                      {
-                        "@type": "ListItem",
-                        position: 2,
-                        name: "Services",
-                        item: `${SITE.url}/services`,
-                      },
-                      {
-                        "@type": "ListItem",
-                        position: 3,
-                        name: s.title,
-                        item: canonicalUrl,
-                      },
-                    ],
+                    item: canonicalUrl,
                   },
                 ],
-              }),
-            },
-          ]
-        : [],
+              },
+            ],
+          }),
+        },
+      ],
     };
   },
   notFoundComponent: () => (
@@ -119,8 +120,11 @@ export const Route = createFileRoute("/services/$slug")({
 });
 
 function ServiceDetail() {
-  const s = Route.useLoaderData() as Service;
+  const { slug } = Route.useParams();
+  const s = SERVICE_BY_SLUG[slug];
+  if (!s) return null;
   const img = SERVICE_IMAGES[s.slug];
+
   return (
     <>
       <PageHero eyebrow="Service" title={s.title} subtitle={s.description}>
