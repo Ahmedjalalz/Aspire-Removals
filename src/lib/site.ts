@@ -17,7 +17,7 @@ export const SITE = {
   tagline: "Trust Us Take You Home",
   phone: "07493 732371",
   email: "info@aspireremovals.co.uk",
-  address: "167 Henley Avenue, Sutton, SM3 9SD",
+  address: "20A Reynolds Road, New Malden, KT3 5NG",
   url: "https://www.aspireremovalsandtransport.co.uk",
   hours: [
     { d: "Monday – Friday", h: "07:00 – 19:00" },

@@ -219,7 +219,7 @@ export function Navbar() {
                             <span>Nationwide UK Coverage</span>
                           </div>
                           <p className="mt-1 text-muted-foreground leading-relaxed">
-                            Full moving services across England, Scotland &amp; Wales from our Sutton base.
+                            Full moving services across England, Scotland &amp; Wales from our New Malden base.
                           </p>
                         </div>
                         <ul className="space-y-1">

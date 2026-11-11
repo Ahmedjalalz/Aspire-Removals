@@ -52,7 +52,7 @@ export const Route = createFileRoute("/removals-croydon")({
       {
         name: "twitter:description",
         content:
-          "Looking for removals croydon? Fully insured home, office and man with a van moving services across Croydon from our nearby Sutton base.",
+          "Looking for removals croydon? Fully insured home, office and man with a van moving services across Croydon from our nearby New Malden base.",
       },
       { name: "twitter:image", content: `${SITE.url}/Hero-Section-Image.png` },
       {
@@ -82,9 +82,9 @@ export const Route = createFileRoute("/removals-croydon")({
                 email: SITE.email,
                 address: {
                   "@type": "PostalAddress",
-                  streetAddress: "167 Henley Avenue",
-                  addressLocality: "Sutton",
-                  postalCode: "SM3 9SD",
+                  streetAddress: "20A Reynolds Road",
+                  addressLocality: "New Malden",
+                  postalCode: "KT3 5NG",
                   addressCountry: "GB",
                 },
               },
@@ -281,7 +281,7 @@ function RemovalsCroydonPage() {
       <PageHero
         eyebrow="Service Area"
         title={<>Removals Croydon | Professional Home & Office Movers</>}
-        subtitle="Trusted domestic, commercial, and man with a van moving services throughout Croydon and surrounding South London areas from our nearby Sutton base."
+        subtitle="Trusted domestic, commercial, and man with a van moving services throughout Croydon and surrounding South London areas from our nearby New Malden base."
       >
         <div className="flex flex-wrap gap-4">
           <Link
@@ -313,7 +313,7 @@ function RemovalsCroydonPage() {
               <p>
                 When planning your removals croydon, Aspire Removals & Transport delivers a
                 dependable, courteous service tailored to your exact schedule. Operating from our
-                nearby base in Sutton, our professional crews assist homeowners, tenants, and
+                nearby base in New Malden, our professional crews assist homeowners, tenants, and
                 local businesses across the borough with smooth, well-organised relocations.
               </p>
               <p>
@@ -550,7 +550,7 @@ function RemovalsCroydonPage() {
             </h2>
             <div className="mt-5 space-y-4 text-muted-foreground text-lg leading-relaxed">
               <p>
-                From our operational base at 167 Henley Avenue in Sutton, our vehicles have swift direct
+                From our operational base at 20A Reynolds Road in New Malden, our vehicles have swift direct
                 access into Croydon via the A232 and A23 corridors. We provide full moving coverage across
                 all local postal districts, including <strong>CR0, CR2, CR7, and CR8</strong>.
               </p>
@@ -690,12 +690,12 @@ function RemovalsCroydonPage() {
                 <a href={`tel:${SITE.phone.replace(/\s/g, "")}`} className="underline font-semibold hover:text-accent">
                   {SITE.phone}
                 </a>{" "}
-                to discuss your dates, or complete our straightforward online quote form. Our Sutton
+                to discuss your dates, or complete our straightforward online quote form. Our New Malden
                 office is open Monday to Friday 07:00–19:00, Saturday 08:00–17:00, and Sunday by appointment.
               </p>
               <div className="mt-4 flex flex-wrap gap-6 text-sm text-white/75">
                 <span className="flex items-center gap-1.5">
-                  <MapPin className="h-4 w-4 text-accent" /> Base: 167 Henley Avenue, Sutton, SM3 9SD
+                  <MapPin className="h-4 w-4 text-accent" /> Base: 20A Reynolds Road, New Malden, KT3 5NG
                 </span>
                 <span className="flex items-center gap-1.5">
                   <Phone className="h-4 w-4 text-accent" /> {SITE.phone}

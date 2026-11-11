@@ -12,7 +12,7 @@ export const Route = createFileRoute("/contact")({
       {
         name: "description",
         content:
-          "Contact Aspire Removals & Transport. Call 07493 732371 or message our Sutton office for free advice and fast booking. Open 7 days a week.",
+          "Contact Aspire Removals & Transport. Call 07493 732371 or message our New Malden office for free advice and fast booking. Open 7 days a week.",
       },
       { property: "og:title", content: "Contact Us | Aspire Removals & Transport UK" },
       {

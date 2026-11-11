@@ -436,7 +436,7 @@ function Home() {
               Nationwide UK coverage with <span className="text-gradient-brand">local expertise</span>
             </h2>
             <p className="mt-4 text-muted-foreground text-lg leading-relaxed">
-              Operating from our Greater London headquarters in Sutton, Aspire Removals &amp; Transport moves homes and businesses across England, Scotland, and Wales. Explore our dedicated local guides or arrange your move anywhere nationwide.
+              Operating from our Greater London headquarters in New Malden, Aspire Removals &amp; Transport moves homes and businesses across England, Scotland, and Wales. Explore our dedicated local guides or arrange your move anywhere nationwide.
             </p>
           </Reveal>
         </div>

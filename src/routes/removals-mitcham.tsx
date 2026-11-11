@@ -37,7 +37,7 @@ export const Route = createFileRoute("/removals-mitcham")({
       {
         property: "og:description",
         content:
-          "Professional moving services across CR4 by Aspire Removals & Transport. Fully insured home, flat, and man and van moves from our nearby Sutton base.",
+          "Professional moving services across CR4 by Aspire Removals & Transport. Fully insured home, flat, and man and van moves from our nearby New Malden base.",
       },
       { property: "og:url", content: `${SITE.url}/removals-mitcham` },
       { property: "og:image", content: `${SITE.url}/Hero-Section-Image.png` },
@@ -52,7 +52,7 @@ export const Route = createFileRoute("/removals-mitcham")({
       {
         name: "twitter:description",
         content:
-          "Looking for removals mitcham? Fully insured home, flat and man and van moving services across CR4 from our nearby Sutton base.",
+          "Looking for removals mitcham? Fully insured home, flat and man and van moving services across CR4 from our nearby New Malden base.",
       },
       { name: "twitter:image", content: `${SITE.url}/Hero-Section-Image.png` },
       {
@@ -82,9 +82,9 @@ export const Route = createFileRoute("/removals-mitcham")({
                 email: SITE.email,
                 address: {
                   "@type": "PostalAddress",
-                  streetAddress: "167 Henley Avenue",
-                  addressLocality: "Sutton",
-                  postalCode: "SM3 9SD",
+                  streetAddress: "20A Reynolds Road",
+                  addressLocality: "New Malden",
+                  postalCode: "KT3 5NG",
                   addressCountry: "GB",
                 },
               },
@@ -257,7 +257,7 @@ function RemovalsMitchamPage() {
       <PageHero
         eyebrow="Service Area"
         title={<>Removals Mitcham | Reliable Home &amp; Flat Movers</>}
-        subtitle="Professional residential moves, packing services, and man and van transport across Mitcham CR4 and neighbouring South London boroughs from our nearby Sutton base."
+        subtitle="Professional residential moves, packing services, and man and van transport across Mitcham CR4 and neighbouring South London boroughs from our nearby New Malden base."
       >
         <div className="flex flex-wrap gap-4">
           <Link
@@ -289,7 +289,7 @@ function RemovalsMitchamPage() {
               <p>
                 If you are looking for dependable removals mitcham, Aspire Removals &amp; Transport
                 provides an organised, professional moving service tailored to your timeline. Located
-                just minutes away in neighbouring Sutton, our experienced moving teams frequently
+                just minutes away in neighbouring New Malden, our experienced moving teams frequently
                 assist residents and businesses relocating across the CR4 district.
               </p>
               <p>
@@ -492,7 +492,7 @@ function RemovalsMitchamPage() {
               </h2>
               <div className="mt-5 space-y-4 text-muted-foreground text-lg leading-relaxed">
                 <p>
-                  From our headquarters at 167 Henley Avenue in Sutton, our team reaches Mitcham in
+                  From our headquarters at 20A Reynolds Road in New Malden, our team reaches Mitcham in
                   minutes via the direct A217 and Bishopsford Road links. We provide complete moving
                   coverage across the entire <strong>CR4 postcode</strong> and adjacent residential borders.
                 </p>
@@ -649,12 +649,12 @@ function RemovalsMitchamPage() {
                   {SITE.phone}
                 </a>{" "}
                 to discuss your requirements or request your free moving quote online. Operating from
-                our nearby Sutton base at 167 Henley Avenue (SM3 9SD), we are open Monday to Friday
+                our nearby New Malden base at 20A Reynolds Road (KT3 5NG), we are open Monday to Friday
                 07:00–19:00, Saturday 08:00–17:00, and Sunday by appointment.
               </p>
               <div className="mt-4 flex flex-wrap gap-6 text-sm text-white/75">
                 <span className="flex items-center gap-1.5">
-                  <MapPin className="h-4 w-4 text-accent" /> Base: 167 Henley Avenue, Sutton, SM3 9SD
+                  <MapPin className="h-4 w-4 text-accent" /> Base: 20A Reynolds Road, New Malden, KT3 5NG
                 </span>
                 <span className="flex items-center gap-1.5">
                   <Phone className="h-4 w-4 text-accent" /> {SITE.phone}

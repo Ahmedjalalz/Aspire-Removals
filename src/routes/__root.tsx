@@ -170,15 +170,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
               },
               address: {
                 "@type": "PostalAddress",
-                streetAddress: "167 Henley Avenue",
-                addressLocality: "Sutton",
-                postalCode: "SM3 9SD",
+                streetAddress: "20A Reynolds Road",
+                addressLocality: "New Malden",
+                postalCode: "KT3 5NG",
                 addressCountry: "GB",
               },
               geo: {
                 "@type": "GeoCoordinates",
-                latitude: "51.3656",
-                longitude: "-0.1963",
+                latitude: "51.3995",
+                longitude: "-0.2548",
               },
               openingHoursSpecification: [
                 {
