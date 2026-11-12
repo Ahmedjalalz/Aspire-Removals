@@ -9,7 +9,7 @@ export interface SitemapItem {
   lastmod?: string;
 }
 
-const DEFAULT_LASTMOD = "2026-11-07";
+const DEFAULT_LASTMOD = "2026-11-12";
 
 export function getSitemapItems(): SitemapItem[] {
   return [
